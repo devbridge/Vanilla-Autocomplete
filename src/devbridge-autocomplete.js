@@ -37,8 +37,10 @@ utils.ajax = function (settings, done, error) {
 
     xhr.open(method, url, true);
 
-    for (var h in headers ) {
-        xhr.setRequestHeader(h, headers[h]);
+    for (var header in headers) {
+        if (headers.hasOwnProperty(header)){
+            xhr.setRequestHeader(header, headers[header]);
+        }
     }
 
     xhr.send(null);
@@ -405,6 +407,7 @@ Autocomplete.prototype = {
         clearInterval(that.onChangeInterval);
         if (that.currentRequest) {
             utils.ajaxAbort(that.currentRequest);
+            that.currentRequest = null;
         }
     },
 
@@ -698,7 +701,8 @@ Autocomplete.prototype = {
             options.onSearchComplete.call(that.element, q, response.suggestions);
         } else if (!that.isBadQuery(q)) {
             if (that.currentRequest) {
-                adapter.abortRequest(that.currentRequest);
+                utils.ajaxAbort(that.currentRequest);
+                that.currentRequest = null;
             }
 
             ajaxSettings = {
@@ -929,6 +933,10 @@ Autocomplete.prototype = {
     },
 
     activate: function (index) {
+        if (typeof index !== 'number') {
+            index = parseInt(index, 10);
+        }
+
         var that = this,
             activeItem,
             selected = that.classes.selected,
@@ -939,15 +947,12 @@ Autocomplete.prototype = {
             utils.removeClass(el, selected);
         });
 
-        that.selectedIndex = parseInt(index, 10);
+        that.selectedIndex = index;
 
-        if (that.selectedIndex !== -1 && children.length > that.selectedIndex) {
-            activeItem = children[that.selectedIndex];
-            utils.addClass(activeItem, selected);
-            return activeItem;
-        }
+        activeItem = children[index];
+        utils.addClass(activeItem, selected);
 
-        return null;
+        return activeItem;
     },
 
     selectHint: function () {
@@ -993,20 +998,11 @@ Autocomplete.prototype = {
 
     adjustScroll: function (index) {
         var that = this,
-            activeItem = that.activate(index);
-
-        if (!activeItem) {
-            return;
-        }
-
-        var offsetTop,
-            upperBound,
-            lowerBound,
-            heightDelta = activeItem.offsetHeight;
-
-        offsetTop = activeItem.offsetTop;
-        upperBound = that.suggestionsContainer.scrollTop;
-        lowerBound = upperBound + that.options.maxHeight - heightDelta;
+            activeItem = that.activate(index),
+            offsetTop = activeItem.offsetTop,
+            upperBound = that.suggestionsContainer.scrollTop,
+            heightDelta = activeItem.offsetHeight,
+            lowerBound = upperBound + that.options.maxHeight - heightDelta;
 
         if (offsetTop < upperBound) {
             that.suggestionsContainer.scrollTop = offsetTop;

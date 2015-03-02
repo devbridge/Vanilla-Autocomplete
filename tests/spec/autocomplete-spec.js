@@ -7,7 +7,8 @@ describe("Autocomplete", function () {
         LEFT: 37,
         UP: 38,
         RIGHT: 39,
-        DOWN: 40
+        DOWN: 40,
+        LETTER_i: 73
     };
 
     function generateEvent(keyCode) {
@@ -354,9 +355,8 @@ describe("Autocomplete", function () {
         });
 
         it ("after key up should call onValueChange", function () {
-            var i = 73;
             instance.value = 'Chi';
-            instance.onKeyUp(generateEvent(i));
+            instance.onKeyUp(generateEvent(keys.LETTER_i));
 
             expect(instance.visible).toBe(true);
         });
@@ -405,6 +405,19 @@ describe("Autocomplete", function () {
             expect(instance.visible).toBe(false);
         });
 
+        it ("should defer request when deferRequestBy is specified", function (done) {
+            instance.setOptions({ deferRequestBy: 50 });
+            instance.element.value = 'Chi';
+            instance.onKeyUp(generateEvent(keys.LETTER_i));
+
+            expect(instance.suggestions.length).toEqual(0);
+
+            setTimeout(function () {
+                expect(instance.suggestions.length).toBeGreaterThan(0);
+                done();
+            }, 100);
+
+        });
     });
 
     describe("Autocomplete triggerSelectOnValidInput: true", function () {
@@ -477,8 +490,18 @@ describe("Autocomplete", function () {
         var instance = new Autocomplete(input, options);
 
         it ('#disable() should disable functionality', function () {
+            var abortCalled = false;
+
+            instance.changeValue('B');
+            instance.currentRequest = {
+                abort: function () {
+                    abortCalled = true;
+                }
+            };
             instance.disable();
+
             expect(instance.disabled).toBe(true);
+            expect(abortCalled).toBe(true);
         });
 
         it ('#enable() should disable functionality', function () {
@@ -580,7 +603,7 @@ describe("Autocomplete", function () {
         });
 
         it ('keydown should...', function () {
-            instance.value = 'B';
+            input.value = 'B';
 
             var event = document.createEvent('CustomEvent');
             event.initEvent('keydown', true, false);
@@ -589,6 +612,16 @@ describe("Autocomplete", function () {
             expect(selected).toBe(true);
         });
 
+        it ("should adjust position on window resize.", function () {
+            spyOn(instance, 'fixPosition');
 
-    });
+            instance.changeValue('B');
+
+            var event = document.createEvent('CustomEvent');
+            event.initEvent('resize', true, false);
+            window.dispatchEvent(event);
+
+            expect(instance.fixPosition).toHaveBeenCalled();
+        });
+ });
 });
