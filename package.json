@@ -1,0 +1,21 @@
+{
+  "name": "DevbridgeAutocomplete",
+  "version": "0.0.1",
+  "description": "Flexible JavaScript library for implementing Autocomplete features.",
+  "main": "index.js",
+  "scripts": {
+    "test": "node_modules/.bin/karma start karma-conf.js"
+  },
+  "keywords": [
+    "devbridge",
+    "autocomplete"
+  ],
+  "author": "Tomas Kirda",
+  "license": "MIT",
+  "devDependencies": {
+    "blanket": "^1.1.6",
+    "karma": "^0.12.31",
+    "karma-coverage": "~0.1.0",
+    "karma-jasmine": "^0.3.3"
+  }
+}
