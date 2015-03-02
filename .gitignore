@@ -2,4 +2,9 @@
 /coverage
 /bower_components
 /.idea
+
 /*.log
+
+*.codekit
+config.codekit
+/.sass-cache

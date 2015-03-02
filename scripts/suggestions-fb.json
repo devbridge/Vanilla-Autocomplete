@@ -1,0 +1,23 @@
+{
+    "suggestions": [
+        {
+            "value": "Chicago Blackhawks",
+            "data": {
+                "img": "https://fbcdn-profile-a.akamaihd.net/hprofile-ak-ash2/v/t1.0-1/p100x100/1391551_10152039077389258_1645706175_n.jpg?oh=b99abfbf3f4a6b6c158d37717b90516a&oe=5575B816&__gda__=1435156345_57178863fb8c831aee7ca0d13f10b44f",
+                "location": "Chicago, IL",
+                "type": "Sports Club",
+                "likes": "2,620,264 like this"
+
+            }
+        },
+        {
+            "value": "Chicago Bulls",
+            "data": {
+                "img": "https://fbcdn-profile-a.akamaihd.net/hprofile-ak-xpa1/v/t1.0-1/p100x100/1381232_10152460742051614_3027024671333304656_n.jpg?oh=f7054db193d5d83677059be39e2f0521&oe=558BC761&__gda__=1434335331_a99ce7f83dbcc9245035d9e4d76cc264",
+                "location": "Chicago, IL",
+                "type": "Sports Club",
+                "likes": "17,963,054 like this"
+            }
+        }
+    ]
+}

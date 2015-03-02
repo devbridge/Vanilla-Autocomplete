@@ -4,15 +4,27 @@
     <meta charset="UTF-8">
     <title>Devbridge Autocomplete</title>
     <link rel="stylesheet" href="content/css/styles.css" />
+    <link rel="stylesheet" href="content/css/demo.css" />
 </head>
 <body>
-<div>
-    <h1>Devbridge Autocomplete</h1>
-    <div style="margin-top: 500px;" id="input-wrapper">
-        <input type="text" id="autocomplete-1" />
-        <div id="autcompletion"></div>
-    </div>
-</div>
+    <header class="site-header">
+        <h1>Devbridge Autocomplete</h1>
+    </header>
+    <main role="main">
+        <section class="demo-area facebook">
+            <div class="container">
+                <h2 class="demo-title">Facebook Search</h2>
+                <div class="input-wrapper">
+                    <label for="autocomplete-1"><span class="sr-only">Example search</span><i class="icon-db"></i></label>
+                    <input type="text" id="autocomplete-1" placeholder="Search Facebook"/>
+                    <button class="btn-search"><span class="icon-search"></span></button>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer class="site-footer">
+
+    </footer>
 <script src="bower_components/requirejs/require.js" data-main="scripts/main"></script>
 </body>
 </html>

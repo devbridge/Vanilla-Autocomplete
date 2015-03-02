@@ -1,0 +1,158 @@
+@font-face {
+  font-family: 'icomoon';
+  src: url('../fonts/icomoon.eot?-yxb3x0');
+  src: url('../fonts/icomoon.eot?#iefix-yxb3x0') format('embedded-opentype'), url('../fonts/icomoon.woff?-yxb3x0') format('woff'), url('../fonts/icomoon.ttf?-yxb3x0') format('truetype'), url('../fonts/icomoon.svg?-yxb3x0#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal; }
+
+[class^="icon-"], [class*=" icon-"] {
+  font-family: 'icomoon';
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale; }
+
+.icon-db:before {
+  content: "\e600"; }
+
+.icon-search:before {
+  content: "\e601"; }
+
+*, *:before, *:after {
+  box-sizing: border-box; }
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0; }
+
+.container {
+  max-width: 940px;
+  margin: 0 auto; }
+
+input, button, select, textarea {
+  outline: none; }
+
+.demo-area {
+  padding: 150px 0 10px;
+  min-height: 600px; }
+
+.demo-title {
+  display: block;
+  font-size: 1.75em;
+  margin-bottom: 1.5em;
+  text-align: center;
+  font-weight: 300;
+  font-family: 'Helvetica', sans-serif; }
+
+.facebook {
+  background: -webkit-linear-gradient(bottom, #4D6BA1, #3B5998);
+  background: linear-gradient(to top, #4D6BA1, #3B5998);
+  border-bottom: 1px solid #133783;
+  font-family: 'lucida grande', tahoma, verdana, arial, sans-serif; }
+  .facebook .demo-title {
+    color: #fff; }
+  .facebook .input-wrapper {
+    position: relative;
+    max-width: 600px;
+    margin: 0 auto;
+    clear: both; }
+  .facebook .btn-search {
+    position: absolute;
+    content: '';
+    background: #f6f7f8;
+    color: #535C68;
+    border: 1px solid #355089;
+    border-left: 0;
+    border-radius: 0 4px 4px 0;
+    cursor: default;
+    display: block;
+    height: 26px;
+    width: 50px;
+    line-height: 1;
+    right: 0;
+    text-align: center;
+    top: 0;
+    z-index: 1; }
+  .facebook label {
+    position: absolute;
+    right: 100%; }
+    .facebook label .icon-db {
+      color: #fff;
+      display: block;
+      border-radius: 3px;
+      overflow: hidden;
+      height: 26px;
+      width: 27px;
+      margin-right: 5px;
+      border: 1px solid #355089;
+      text-align: center; }
+      .facebook label .icon-db:before {
+        font-size: 26px; }
+  .facebook input {
+    width: 100%;
+    border: 1px solid #355089;
+    border-radius: 4px;
+    height: 26px;
+    padding-left: 5px;
+    font-size: .875em; }
+    .facebook input:focus ~ .btn-search {
+      background-color: #5890ff;
+      color: #fff; }
+  .facebook .icon-search {
+    font-size: 1em; }
+  .facebook .autocomplete-suggestions {
+    background-color: #fff;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    box-shadow: 0 4px 6px 2px rgba(0, 0, 0, 0.1);
+    font-size: .875em;
+    margin-left: 1px;
+    clear: both; }
+  .facebook .autocomplete-suggestion {
+    position: relative;
+    cursor: pointer; }
+  .facebook .autocomplete-selected {
+    background-color: #EBEEF4; }
+  .facebook .autocomplete-suggestions strong {
+    font-weight: 700; }
+  .facebook .suggestion-img {
+    float: left;
+    height: 40px;
+    line-height: 40px;
+    margin: 4px 8px 0 6px;
+    overflow: hidden;
+    text-align: center;
+    vertical-align: middle;
+    width: 40px; }
+    .facebook .suggestion-img img {
+      max-width: 100%;
+      max-height: 40px;
+      display: block; }
+  .facebook .suggestion-wrapper {
+    display: block;
+    height: 48px;
+    overflow: hidden;
+    position: relative;
+    text-overflow: ellipsis;
+    vertical-align: middle;
+    line-height: 16px;
+    padding: 7px 0; }
+  .facebook .suggestion-value {
+    display: block;
+    line-height: normal;
+    font-weight: 700; }
+  .facebook .sub-text {
+    color: #999;
+    font-size: 11px;
+    font-weight: normal; }

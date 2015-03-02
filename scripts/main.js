@@ -19,10 +19,17 @@ require(['Autocomplete'], function (Autocomplete) {
     var element = document.getElementById('autocomplete-1');
 
     var options = {
-        // lookup: ['Chicago Blackhawks', 'Chicago Bulls', 'New York', 'Miami'],
-        serviceUrl: '/scripts/suggestions.json',
+        serviceUrl: '/scripts/suggestions-fb.json',
         minChars: 1,
-        autoSelectFirst: true
+        autoSelectFirst: true,
+        appendTo: element.parentNode,
+        formatResult: function (suggestion) {
+            return '<span class="suggestion-img"><img src="'+ suggestion.data.img +'"/></span> \
+                <span class="suggestion-wrapper"> \
+                <span class="suggestion-value">' + suggestion.value + '</span> \
+                <span class="sub-text">' + suggestion.data.location + '</span> \
+                <span class="sub-text">' + suggestion.data.likes + '</span></span>'
+        }
     };
 
     var instance = new Autocomplete(element, options);
