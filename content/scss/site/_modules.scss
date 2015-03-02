@@ -225,64 +225,27 @@ input, button, select, textarea {
 		z-index: 1;
 		border-radius: 0 3px 3px 0;
 	}
-
-
 	.autocomplete-suggestions {
 		background-color: #fff;
-		border-radius: 4px;
 		border: 1px solid #ccc;
 		box-shadow: 0 4px 6px 2px rgba(0, 0, 0, .10);
 		font-size: .875em;
-		margin-left: 1px;
-		clear: both;
+		margin-top: -1px;
+		overflow: hidden;
 	}
 	.autocomplete-suggestion {
 		position: relative;
 		cursor: pointer;
+		font-weight: 700;
+		line-height: 22px;
+		padding: 0 5px;
 	}
 	.autocomplete-selected {
 		background-color: #EBEEF4;
 	}
 	.autocomplete-suggestions strong {
-		font-weight: 700;
+		font-weight: 100;
 	}
 
-	.suggestion-img {
-		float: left;
-		height: 40px;
-		line-height: 40px;
-		margin: 4px 8px 0 6px;
-		overflow: hidden;
-		text-align: center;
-		vertical-align: middle;
-		width: 40px;
-		img {
-			max-width: 100%;
-			max-height: 40px;
-			display: block;
-		}
-	}
 
-	.suggestion-wrapper {
-		display: block;
-		height: 48px;
-		overflow: hidden;
-		position: relative;
-		text-overflow: ellipsis;
-		vertical-align: middle;
-		line-height: 16px;
-		padding: 7px 0;
-	}
-
-	.suggestion-value {
-		display: block;
-		line-height: normal;
-		font-weight: 700;
-	}
-
-	.sub-text {
-		color: #999;
-		font-size: 11px;
-		font-weight: normal;
-	}
 }
