@@ -243,9 +243,10 @@ function Autocomplete(el, options) {
             transformResult: function (response) {
                 return typeof response === 'string' ? JSON.parse(response) : response;
             },
-            showNoSuggestionNotice: false,
-            noSuggestionNotice: 'No results',
-            forceFixPosition: false
+            forceFixPosition: false,
+            formatGroup: function (value) {
+                return '<div class="autocomplete-group"><strong>' + value + '</strong></div>';
+            }
         };
 
     // Shared variables:
@@ -260,7 +261,6 @@ function Autocomplete(el, options) {
     that.onChange = null;
     that.isLocal = false;
     that.suggestionsContainer = null;
-    that.noSuggestionsContainer = null;
     that.options = utils.extend({}, defaults, options);
     that.classes = {
         selected: 'autocomplete-selected',
@@ -269,6 +269,7 @@ function Autocomplete(el, options) {
     that.hint = null;
     that.hintValue = '';
     that.selection = null;
+    that.visible = false;
 
     // Initialize and set options:
     that.initialize();
@@ -299,10 +300,6 @@ Autocomplete.prototype = {
             that.killSuggestions();
             that.disableKillerFn();
         };
-
-        //// html() deals with many types: htmlString or Element or Array or jQuery
-        //that.noSuggestionsContainer = $('<div class="autocomplete-no-suggestion"></div>')
-        //                              .html(this.options.noSuggestionNotice).get(0);
 
         that.suggestionsContainer = utils.createNode(options.containerClass);
 
@@ -352,11 +349,17 @@ Autocomplete.prototype = {
 
         utils.on(window, 'resize', that.fixPositionCapture);
 
-        utils.on(element, 'keydown', function (e) { that.onKeyDown(e); });
-        utils.on(element, 'keyup', function (e) { that.onKeyUp(e); });
-        utils.on(element, 'blur', function (e) { that.onBlur(e); });
-        utils.on(element, 'focus', function (e) { that.onFocus(e); });
-        utils.on(element, 'change', function (e) { that.onKeyUp(e); });
+        function bind(fn) {
+            return function (e) {
+                fn.call(that, e);
+            }
+        }
+
+        utils.on(element, 'keydown', bind(that.onKeyDown));
+        utils.on(element, 'keyup', bind(that.onKeyUp));
+        utils.on(element, 'change', bind(that.onKeyUp));
+        utils.on(element, 'blur', bind(that.onBlur));
+        utils.on(element, 'focus', bind(that.onFocus));
     },
 
     onFocus: function () {
@@ -722,8 +725,8 @@ Autocomplete.prototype = {
                     that.processResponse(result, q, cacheKey);
                     options.onSearchComplete.call(that.element, q, result.suggestions);
                 },
-                function(jqXHR, textStatus, errorThrown) {
-                    options.onSearchError.call(that.element, q, jqXHR, textStatus, errorThrown);
+                function(xhr) {
+                    options.onSearchError.call(that.element, q, xhr);
                 });
         } else {
             options.onSearchComplete.call(that.element, q, []);
@@ -731,12 +734,13 @@ Autocomplete.prototype = {
     },
 
     isBadQuery: function (q) {
-        if (!this.options.preventBadQueries){
+        var that = this,
+            badQueries = that.badQueries,
+            i = badQueries.length;
+
+        if (!that.options.preventBadQueries){
             return false;
         }
-
-        var badQueries = this.badQueries,
-            i = badQueries.length;
 
         while (i--) {
             if (q.indexOf(badQueries[i]) === 0) {
@@ -758,11 +762,7 @@ Autocomplete.prototype = {
 
     suggest: function () {
         if (this.suggestions.length === 0) {
-            if (this.options.showNoSuggestionNotice) {
-                this.noSuggestions();
-            } else {
-                this.hide();
-            }
+            this.hide();
             return;
         }
 
@@ -774,11 +774,10 @@ Autocomplete.prototype = {
             className = that.classes.suggestion,
             classSelected = that.classes.selected,
             container = that.suggestionsContainer,
-            noSuggestionsContainer = that.noSuggestionsContainer,
             beforeRender = options.beforeRender,
             html = '',
             category,
-            formatGroup = function (suggestion, index) {
+            formatGroup = function (suggestion) {
                     var currentCategory = suggestion.data[groupBy];
 
                     if (category === currentCategory){
@@ -787,7 +786,7 @@ Autocomplete.prototype = {
 
                     category = currentCategory;
 
-                    return '<div class="autocomplete-group"><strong>' + category + '</strong></div>';
+                    return options.formatGroup(category);
                 },
             index;
 
@@ -810,7 +809,6 @@ Autocomplete.prototype = {
 
         this.adjustContainerWidth();
 
-        // noSuggestionsContainer.detach();
         container.innerHTML = html;
 
         if (utils.isFunction(beforeRender)) {
@@ -829,25 +827,6 @@ Autocomplete.prototype = {
 
         that.visible = true;
         that.findBestHint();
-    },
-
-    noSuggestions: function() {
-         var that = this,
-             container = $(that.suggestionsContainer),
-             noSuggestionsContainer = $(that.noSuggestionsContainer);
-
-        this.adjustContainerWidth();
-
-        // Some explicit steps. Be careful here as it easy to get
-        // noSuggestionsContainer removed from DOM if not detached properly.
-        noSuggestionsContainer.detach();
-        container.empty(); // clean suggestions if any
-        container.append(noSuggestionsContainer);
-
-        that.fixPosition();
-
-        container.show();
-        that.visible = true;
     },
 
     adjustContainerWidth: function() {
@@ -1046,10 +1025,6 @@ Autocomplete.prototype = {
 
         currentValue = that.currentValue;
         parts = currentValue.split(delimiter);
-
-        if (parts.length === 1) {
-            return value;
-        }
 
         return currentValue.substr(0, currentValue.length - parts[parts.length - 1].length) + value;
     },

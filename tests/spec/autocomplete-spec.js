@@ -191,7 +191,12 @@ describe("Autocomplete", function () {
 
         var selectedSuggestion = null;
         var options = {
-            lookup: ['Chicago Bulls', 'Chicago Blackhawks', 'Miami Heat'],
+            lookup: [
+                { value: 'Chicago Bulls'      , data: { category: 'NBA' } },
+                { value: 'Chicago Blackhawks' , data: { category: 'NHL' } },
+                { value: 'Chicago Wolves'     , data: { category: 'NHL' } },
+                { value: 'Miami Heat'         , data: { category: 'NBA' } }
+            ],
             autoSelectFirst: true,
             onSelect: function (suggestion) {
                 selectedSuggestion = suggestion;
@@ -208,11 +213,11 @@ describe("Autocomplete", function () {
 
         it ("should execute local lookup", function () {
             instance.changeValue('Chi');
-            expect(instance.suggestions.length).toEqual(2);
+            expect(instance.suggestions.length).toEqual(3);
             expect(instance.suggestions[0].value).toEqual('Chicago Bulls');
             expect(instance.suggestions[1].value).toEqual('Chicago Blackhawks');
+            expect(instance.suggestions[2].value).toEqual('Chicago Wolves');
         });
-
 
         it ("after key press RIGHT should select hint", function () {
             instance.changeValue('Chi');
@@ -227,9 +232,19 @@ describe("Autocomplete", function () {
             expect(instance.selectedIndex).toEqual(-1);
         });
 
+        it ("after key press RIGHT should NOT select hint", function () {
+            instance.setOptions({ onHint: null });
+            instance.changeValue('Chi');
+            expect(instance.selectedIndex).toEqual(0);
+
+            // Hit RIGHT:
+            instance.onKeyDown(generateEvent(keys.RIGHT));
+            expect(instance.selectedIndex).toEqual(0);
+        });
+
         it ("after key press DOWN should move cursor down", function () {
             instance.changeValue('Chi');
-            var index = instance.selectedIndex + 1;
+            var index = instance.selectedIndex + 2;
 
             // Hit down twice:
             instance.onKeyDown(generateEvent(keys.DOWN));
@@ -359,6 +374,33 @@ describe("Autocomplete", function () {
             instance.onKeyUp(generateEvent(keys.LETTER_i));
 
             expect(instance.visible).toBe(true);
+
+            // Expand code coverage for keys.UP:
+            instance.onKeyUp(generateEvent(keys.UP));
+
+            // Expand code coverage when plugin disabled:
+            instance.disable();
+            instance.onKeyUp(generateEvent(keys.LETTER_i));
+            instance.enable();
+        });
+
+        it ("after key up should call onValueChange but do nothing when query is shorter than minChars", function () {
+            instance.setOptions({ minChars: 2 });
+            instance.changeValue('C');
+
+            expect(instance.visible).toBe(false);
+        });
+
+        it ("should do nothing when onSearchStart returns false", function () {
+            instance.setOptions({
+                onSearchStart: function () {
+                    return false;
+                }
+            });
+            instance.changeValue('Chi');
+
+            expect(instance.visible).toBe(false);
+            instance.setOptions({ onSearchStart: function () { return true; } });
         });
 
         it ("on focus should display suggestions", function () {
@@ -417,6 +459,32 @@ describe("Autocomplete", function () {
                 done();
             }, 100);
 
+        });
+
+        it ("should group data by specified field.", function () {
+            instance.setOptions({ groupBy: 'category' });
+            instance.changeValue('Chi');
+
+            var groups = instance.suggestionsContainer.getElementsByClassName('autocomplete-group');
+
+            expect(groups.length).toBeGreaterThan(0);
+        });
+
+        it ("should limit suggestion number.", function () {
+            instance.setOptions({ lookupLimit: 1 });
+            instance.changeValue('Chi');
+
+            expect(instance.suggestions.length).toBe(1);
+        });
+
+        it ("should split by specified delimiter.", function () {
+            instance.setOptions({ delimiter: ',' });
+            instance.changeValue('Test,Chi');
+
+            expect(instance.suggestions[0].value).toBe('Chicago Bulls');
+
+            instance.select(0);
+            expect(instance.element.value).toBe('Test,Chicago Bulls');
         });
     });
 
@@ -543,9 +611,16 @@ describe("Autocomplete", function () {
 
 
         it ('#ajax() should get ajax data', function (done) {
+            var called = false;
+
             instance.setOptions({
+                serviceUrl: function () {
+                    called = true;
+                    return '/suggest';
+                },
                 onSearchComplete: function (q, suggestions) {
                     expect(suggestions.length).toEqual(1);
+                    expect(called).toBe(true);
                     done();
                 }
             });
@@ -560,6 +635,43 @@ describe("Autocomplete", function () {
             });
         });
 
+        it ('#ajax() should prevent bad queries', function (done) {
+            instance.setOptions({
+                onSearchComplete: function (q, suggestions) {
+                    expect(suggestions.length).toEqual(0);
+                    done();
+                }
+            });
+
+            // Call twice:
+            instance.changeValue('ZZZ');
+            instance.changeValue('ZZZ');
+
+            var request = jasmine.Ajax.requests.mostRecent();
+
+            request.respondWith({
+                status: 200,
+                responseText: '{ "suggestions": [] }'
+            });
+        });
+
+        it ('#ajax() handle ajax error', function (done) {
+            instance.setOptions({
+                onSearchError: function (q, xhr) {
+                    expect(xhr.status).toEqual(500);
+                    done();
+                }
+            });
+
+            instance.changeValue('Test for error');
+
+            var request = jasmine.Ajax.requests.mostRecent();
+
+            request.respondWith({
+                status: 500,
+                responseText: 'Error'
+            });
+        });
     });
 
     describe('Autocomplete events', function () {
