@@ -4,7 +4,7 @@
   "description": "Flexible JavaScript library for implementing Autocomplete features.",
   "main": "index.js",
   "scripts": {
-    "test": "node_modules/.bin/karma start karma-conf.js"
+    "test": "./node_modules/.bin/karma start karma-conf.js"
   },
   "keywords": [
     "devbridge",
