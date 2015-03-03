@@ -28,7 +28,7 @@ require(['Autocomplete'], function (Autocomplete) {
                 <span class="suggestion-wrapper"> \
                 <span class="suggestion-value">' + suggestion.value + '</span> \
                 <span class="sub-text">' + suggestion.data.location + '</span> \
-                <span class="sub-text">' + suggestion.data.likes + '</span></span>'
+                <span class="sub-text">' + suggestion.data.likes + '</span></span>';
         }
     };
 

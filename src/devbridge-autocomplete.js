@@ -204,7 +204,7 @@ utils.hide = function (element) {
 };
 
 utils.on = function (element, event, callback) {
-    element.addEventListener(event, callback);
+    element.addEventListener(event, callback, false);
 };
 
 function Autocomplete(el, options) {
@@ -315,12 +315,13 @@ Autocomplete.prototype = {
             utils.css(that.suggestionsContainer, { width: options.width });
         }
 
+
         // Listen for mouse over event on suggestions list:
         utils.on(container, 'mouseover', function (event) {
             var el = utils.matchElement(event, that.classes.suggestion, container);
 
             if (el) {
-                that.activate(utils.getData(event.srcElement, 'index'));
+                that.activate(utils.getData(el, 'index'));
             }
         });
 
@@ -335,7 +336,7 @@ Autocomplete.prototype = {
         });
 
         utils.on(container, 'click', function (event) {
-            var el = utils.matchElement(event, that.classes.suggestion, that.suggestionsContainer);
+            var el = utils.matchElement(event, that.classes.suggestion, container);
 
             if (el){
                 that.select(utils.getData(el, 'index'));
@@ -938,10 +939,10 @@ Autocomplete.prototype = {
         }
 
         var that = this,
-            activeItem,
             selected = that.classes.selected,
             container = that.suggestionsContainer,
-            children = container.getElementsByClassName(that.classes.suggestion);
+            children = container.getElementsByClassName(that.classes.suggestion),
+            activeItem = children[index];
 
         utils.each(container.getElementsByClassName(selected), function (el) {
             utils.removeClass(el, selected);
@@ -949,7 +950,6 @@ Autocomplete.prototype = {
 
         that.selectedIndex = index;
 
-        activeItem = children[index];
         utils.addClass(activeItem, selected);
 
         return activeItem;
