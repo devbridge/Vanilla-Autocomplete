@@ -26,6 +26,9 @@
 *, *:before, *:after {
   box-sizing: border-box; }
 
+body {
+  font-family: 'Helvetica', sans-serif; }
+
 .sr-only {
   position: absolute;
   width: 1px;
@@ -35,6 +38,17 @@
   overflow: hidden;
   clip: rect(0, 0, 0, 0);
   border: 0; }
+
+.site-header {
+  min-height: 800px;
+  text-align: center;
+  width: 100%;
+  display: table; }
+  .site-header .container {
+    display: table-cell;
+    vertical-align: middle; }
+  .site-header h1 {
+    font-size: 3em; }
 
 .container {
   max-width: 940px;
@@ -52,8 +66,7 @@ input, button, select, textarea {
   font-size: 1.75em;
   margin-bottom: 1.5em;
   text-align: center;
-  font-weight: 300;
-  font-family: 'Helvetica', sans-serif; }
+  font-weight: 300; }
 
 .icon-search {
   font-size: 16px; }
@@ -159,11 +172,13 @@ input, button, select, textarea {
     font-weight: normal; }
 
 .google {
-  background: #F1F1F1;
   border-bottom: 1px solid #E5E5E5;
   font-family: 'lucida grande', tahoma, verdana, arial, sans-serif; }
   .google .demo-title {
-    color: #000; }
+    color: #000;
+    margin-bottom: 1em; }
+    .google .demo-title img {
+      max-width: 269px; }
   .google .input-wrapper {
     position: relative;
     max-width: 600px;
@@ -187,7 +202,7 @@ input, button, select, textarea {
   .google input {
     width: 100%;
     border: 1px solid #A0A0A0;
-    height: 28px;
+    height: 30px;
     padding-left: 5px;
     font-size: .875em;
     border-radius: 0 4px 4px 0; }
@@ -206,7 +221,7 @@ input, button, select, textarea {
     border-left: 0;
     cursor: default;
     display: block;
-    height: 28px;
+    height: 30px;
     width: 50px;
     line-height: 1;
     right: 0;
