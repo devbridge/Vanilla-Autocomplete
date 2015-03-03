@@ -4,6 +4,12 @@ node_js:
 before_install:
   - 'npm install -g grunt-cli'
   - 'npm install -g karma-cli'
+  - 'npm install -g codeclimate-test-reporter'
   - 'npm install grunt'
   - 'npm install karma'
   - 'npm install karma-phantomjs-launcher'
+addons:
+  code_climate:
+    repo_token: ede36e0629798a65e62b61aa886fb826998d09967792f92bce330591a7f885de
+after_script:
+  - cat lcov.info | codeclimate
