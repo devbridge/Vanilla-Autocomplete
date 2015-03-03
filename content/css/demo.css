@@ -55,6 +55,9 @@ input, button, select, textarea {
   font-weight: 300;
   font-family: 'Helvetica', sans-serif; }
 
+.icon-search {
+  font-size: 16px; }
+
 .facebook {
   background: -webkit-linear-gradient(bottom, #4D6BA1, #3B5998);
   background: linear-gradient(to top, #4D6BA1, #3B5998);
@@ -109,8 +112,6 @@ input, button, select, textarea {
     .facebook input:focus ~ .btn-search {
       background-color: #5890ff;
       color: #fff; }
-  .facebook .icon-search {
-    font-size: 1em; }
   .facebook .autocomplete-suggestions {
     background-color: #fff;
     border-radius: 4px;
@@ -156,3 +157,77 @@ input, button, select, textarea {
     color: #999;
     font-size: 11px;
     font-weight: normal; }
+
+.google {
+  background: #F1F1F1;
+  border-bottom: 1px solid #E5E5E5;
+  font-family: 'lucida grande', tahoma, verdana, arial, sans-serif; }
+  .google .demo-title {
+    color: #000; }
+  .google .input-wrapper {
+    position: relative;
+    max-width: 600px;
+    margin: 0 auto;
+    clear: both; }
+  .google label {
+    position: absolute;
+    right: 100%; }
+    .google label .icon-db {
+      color: red;
+      display: block;
+      border-radius: 3px;
+      overflow: hidden;
+      height: 26px;
+      width: 27px;
+      margin-right: 5px;
+      border: 1px solid red;
+      text-align: center; }
+      .google label .icon-db:before {
+        font-size: 26px; }
+  .google input {
+    width: 100%;
+    border: 1px solid #A0A0A0;
+    height: 28px;
+    padding-left: 5px;
+    font-size: .875em;
+    border-radius: 0 4px 4px 0; }
+    .google input:focus {
+      border-color: #4d90fe; }
+    .google input:focus ~ .btn-search {
+      background-color: #5890ff;
+      color: #fff; }
+  .google .btn-search {
+    position: absolute;
+    content: '';
+    background: -webkit-linear-gradient(top, #4d90fe, #4787ed);
+    background: linear-gradient(top, #4d90fe, #4787ed);
+    color: #fff;
+    border: 1px solid #4d90fe;
+    border-left: 0;
+    cursor: default;
+    display: block;
+    height: 28px;
+    width: 50px;
+    line-height: 1;
+    right: 0;
+    text-align: center;
+    top: 0;
+    z-index: 1;
+    border-radius: 0 3px 3px 0; }
+  .google .autocomplete-suggestions {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    box-shadow: 0 4px 6px 2px rgba(0, 0, 0, 0.1);
+    font-size: .875em;
+    margin-top: -1px;
+    overflow: hidden; }
+  .google .autocomplete-suggestion {
+    position: relative;
+    cursor: pointer;
+    font-weight: 700;
+    line-height: 22px;
+    padding: 0 5px; }
+  .google .autocomplete-selected {
+    background-color: #EBEEF4; }
+  .google .autocomplete-suggestions strong {
+    font-weight: 100; }

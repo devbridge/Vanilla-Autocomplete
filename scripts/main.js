@@ -34,5 +34,16 @@ require(['Autocomplete'], function (Autocomplete) {
 
     var instance = new Autocomplete(element, options);
 
+    var element2 = document.getElementById('autocomplete-2');
+
+    var options2 = {
+        serviceUrl: '/scripts/suggestions-google.json',
+        minChars: 1,
+        autoSelectFirst: true,
+        appendTo: element2.parentNode
+    };
+
+    var instance2 = new Autocomplete(element2, options2);
+
     console.log('Page loaded: ', instance);
 });
