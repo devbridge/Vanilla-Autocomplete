@@ -2,7 +2,7 @@
 
 require.config({
     urlArgs: '',
-    baseUrl: '/scripts/',
+    baseUrl: 'scripts/',
     paths: {
         Autocomplete: '../src/devbridge-autocomplete'
     },
