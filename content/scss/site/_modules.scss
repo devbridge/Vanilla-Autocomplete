@@ -21,13 +21,6 @@
 
 .code-tab-wrapper {
 	@include clearfix();
-	.tab {
-		padding: 1em;
-		color: $white;
-		background-color: $black;
-		overflow: auto;
-		max-height: 200px;
-	}
 }
 
 .code-tabs {
@@ -46,7 +39,7 @@
 		padding: 10px 20px;
 		border: 1px solid $border-color;
 		border-radius: $border-radius $border-radius 0 0;
-		background-color: $white;
+		background-color: #eee;
 		color: $black;
 		text-decoration: none;
 		&:hover {
@@ -54,6 +47,7 @@
 		}
 		&.current {
 			border-bottom-color: $white;
+			background-color: $white;
 		}
 	}
 }

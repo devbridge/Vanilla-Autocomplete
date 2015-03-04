@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="app">
 <head lang="en">
     <meta charset="UTF-8">
     <title>Devbridge Autocomplete</title>
-    <link rel="stylesheet" href="content/css/styles.css" />
-    <link rel="stylesheet" href="content/css/demo.css" />
+    <link rel="stylesheet" href="/content/css/styles.css" />
+    <link rel="stylesheet" href="/content/css/demo.css" />
+    <link rel="stylesheet" href="/content/css/railscasts.css">
 </head>
 <body ng-controller="AppController as ctrl">
     <header class="site-header">
@@ -26,64 +27,167 @@
             </div>
             <div class="code-examples-wrapper">
                 <div class="container">
-                    <ul class="code-tabs">
-                        <li><a href="#html" class="current">HTML</a></li>
-                        <li><a href="#css">CSS</a></li>
-                        <li><a href="#js">JS</a></li>
+                    <ul class="code-tabs" ng-init="tab=1">
+                        <li><a href ng-click="tab=1" ng-class="{ current: tab == 1 }">HTML</a></li>
+                        <li><a href ng-click="tab=2" ng-class="{ current: tab == 2 }">CSS</a></li>
+                        <li><a href ng-click="tab=3" ng-class="{ current: tab == 3 }">JS</a></li>
                     </ul>
                     <div class="code-tab-wrapper">
-                        <div id="html" class="tab">
+                        <div class="tab" ng-show="tab == 1">
+                            <h3>Example HTML Markup</h3>
                         <pre>
-Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-Maecenas elit neque, molestie tincidunt orci at, porta venenatis risus.
-Sed ultricies leo in fermentum placerat. Curabitur ante risus, lobortis ut laoreet id,
-mollis sed ante. Integer vitae auctor sapien, sit
-amet varius tellus. Curabitur vel lectus vestibulum, lobortis ipsum varius,
-ultrices quam. Nam sagittis et nulla et sodales. Phasellus interdum pretium pulvinar.
-Nunc condimentum tortor libero, a efficitur augue pretium eget. Aenean in magna nulla.
-Nullam pharetra sem ut enim ornare, sodales ultricies sapien congue.
-Phasellus egestas orci non elit ultrices, id imperdiet leo dignissim.
-In hac habitasse platea dictumst. Donec malesuada venenatis mauris non vestibulum.
-Integer vitae magna blandit, tempus neque eu, ullamcorper metus.
-Maecenas auctor justo vitae quam sodales suscipit.
-Fusce semper enim et consectetur mollis. Vivamus vel ullamcorper tortor.
-Mauris vel volutpat lorem. In mattis sapien ex, in finibus erat iaculis id.
+                            <code class="html">
+&lt;div class=&quot;input-wrapper&quot;&gt;
+    &lt;label for=&quot;autocomplete-2&quot;&gt;&lt;span class=&quot;sr-only&quot;&gt;Example search&lt;/span&gt;&lt;/label&gt;
+    &lt;input type=&quot;text&quot; id=&quot;autocomplete-2&quot; placeholder=&quot;Search Google&quot;/&gt;
+    &lt;button class=&quot;btn-search&quot;&gt;&lt;span class=&quot;icon-search&quot;&gt;&lt;/span&gt;&lt;/button&gt;
+&lt;/div&gt;
+                            </code>
 </pre>
                         </div>
-                        <div id="css" class="tab" style="display: none;">
+                        <div class="tab" ng-show="tab == 2">
+                            <h3>Example CSS Styles</h3>
                         <pre>
-Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-Maecenas elit neque, molestie tincidunt orci at, porta venenatis risus.
-Sed ultricies leo in fermentum placerat. Curabitur ante risus, lobortis ut laoreet id,
-mollis sed ante. Integer vitae auctor sapien, sit
-amet varius tellus. Curabitur vel lectus vestibulum, lobortis ipsum varius,
-ultrices quam. Nam sagittis et nulla et sodales. Phasellus interdum pretium pulvinar.
-Nunc condimentum tortor libero, a efficitur augue pretium eget. Aenean in magna nulla.
-Nullam pharetra sem ut enim ornare, sodales ultricies sapien congue.
-Phasellus egestas orci non elit ultrices, id imperdiet leo dignissim.
-In hac habitasse platea dictumst. Donec malesuada venenatis mauris non vestibulum.
-Integer vitae magna blandit, tempus neque eu, ullamcorper metus.
-Maecenas auctor justo vitae quam sodales suscipit.
-Fusce semper enim et consectetur mollis. Vivamus vel ullamcorper tortor.
-Mauris vel volutpat lorem. In mattis sapien ex, in finibus erat iaculis id.
+                            <code class="css">
+.facebook {
+  background: linear-gradient(to top, #4D6BA1, #3B5998);
+  font-family: 'lucida grande', tahoma, verdana, arial, sans-serif;
+}
+.facebook .demo-title {
+  color: #fff;
+}
+.facebook .input-wrapper {
+  position: relative;
+  max-width: 600px;
+  margin: 0 auto;
+  clear: both;
+}
+.facebook .btn-search {
+  position: absolute;
+  content: '';
+  background: #f6f7f8;
+  color: #535C68;
+  border: 1px solid #355089;
+  border-left: 0;
+  border-radius: 0 4px 4px 0;
+  cursor: default;
+  display: block;
+  height: 26px;
+  width: 50px;
+  line-height: 1;
+  right: 0;
+  text-align: center;
+  top: 0;
+  z-index: 1;
+}
+.facebook label {
+  position: absolute;
+  right: 100%;
+}
+.facebook label .icon-db {
+  color: #fff;
+  display: block;
+  border-radius: 4px;
+  overflow: hidden;
+  height: 26px;
+  width: 27px;
+  margin-right: 5px;
+  border: 1px solid #355089;
+  text-align: center;
+}
+.facebook label .icon-db:before {
+  font-size: 26px;
+}
+.facebook input {
+  width: 100%;
+  border: 1px solid #355089;
+  border-radius: 4px;
+  height: 26px;
+  padding-left: 5px;
+  font-size: .875em;
+}
+.facebook input:focus ~ .btn-search {
+  background-color: #5890ff;
+  color: #fff;
+}
+.facebook .autocomplete-suggestions {
+  background-color: #fff;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  box-shadow: 0 4px 6px 2px rgba(0, 0, 0, 0.1);
+  font-size: .875em;
+  margin-left: 1px;
+  clear: both;
+}
+.facebook .autocomplete-suggestion {
+  position: relative;
+  cursor: pointer;
+}
+.facebook .autocomplete-selected {
+  background-color: #EBEEF4;
+}
+.facebook .autocomplete-suggestions strong {
+  font-weight: 700;
+}
+.facebook .suggestion-img {
+  float: left;
+  height: 40px;
+  line-height: 40px;
+  margin: 4px 8px 0 6px;
+  overflow: hidden;
+  text-align: center;
+  vertical-align: middle;
+  width: 40px;
+}
+.facebook .suggestion-img img {
+  max-width: 100%;
+  max-height: 40px;
+  display: block;
+}
+.facebook .suggestion-wrapper {
+  display: block;
+  height: 48px;
+  overflow: hidden;
+  position: relative;
+  text-overflow: ellipsis;
+  vertical-align: middle;
+  line-height: 16px;
+  padding: 7px 0;
+}
+.facebook .suggestion-value {
+  display: block;
+  line-height: normal;
+  font-weight: 700;
+}
+.facebook .sub-text {
+  color: #999;
+  font-size: 11px;
+  font-weight: normal;
+}
+                            </code>
 </pre>
                         </div>
-                        <div id="js" class="tab" style="display: none;">
+                        <div class="tab" ng-show="tab == 3">
+                            <h3>Example JavaScript</h3>
                         <pre>
-Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-Maecenas elit neque, molestie tincidunt orci at, porta venenatis risus.
-Sed ultricies leo in fermentum placerat. Curabitur ante risus, lobortis ut laoreet id,
-mollis sed ante. Integer vitae auctor sapien, sit
-amet varius tellus. Curabitur vel lectus vestibulum, lobortis ipsum varius,
-ultrices quam. Nam sagittis et nulla et sodales. Phasellus interdum pretium pulvinar.
-Nunc condimentum tortor libero, a efficitur augue pretium eget. Aenean in magna nulla.
-Nullam pharetra sem ut enim ornare, sodales ultricies sapien congue.
-Phasellus egestas orci non elit ultrices, id imperdiet leo dignissim.
-In hac habitasse platea dictumst. Donec malesuada venenatis mauris non vestibulum.
-Integer vitae magna blandit, tempus neque eu, ullamcorper metus.
-Maecenas auctor justo vitae quam sodales suscipit.
-Fusce semper enim et consectetur mollis. Vivamus vel ullamcorper tortor.
-Mauris vel volutpat lorem. In mattis sapien ex, in finibus erat iaculis id.
+                            <code class="javascript">
+var element = document.getElementById('autocomplete-1');
+
+var options = {
+    serviceUrl: '/scripts/suggestions-fb.json',
+    minChars: 1,
+    autoSelectFirst: true,
+    appendTo: element.parentNode,
+    formatResult: function (suggestion) {
+        return &quot;&lt;span class='suggestion-img'&gt;&lt;img src='&quot; + suggestion.data.img + &quot;'/&gt;&quot; +
+            &quot;&lt;/span&gt;&lt;span class='suggestion-wrapper'&gt;&lt;span class='suggestion-value'&gt;&quot; + suggestion.value + &quot;&lt;/span&gt;&quot; +
+            &quot;&lt;span class='sub-text'&gt;&quot; + suggestion.data.location + &quot;&lt;/span&gt;&quot; +
+            &quot;&lt;span class='sub-text'&gt;&quot; + suggestion.data.likes + &quot;&lt;/span&gt;&lt;/span&gt;&quot;;
+    }
+};
+
+var instance = new autocomplete(element, options);
+                            </code>
 </pre>
                         </div>
                     </div>
@@ -104,13 +208,16 @@ Mauris vel volutpat lorem. In mattis sapien ex, in finibus erat iaculis id.
             <div class="code-examples-wrapper">
                 <div class="container">
                     <ul class="code-tabs">
-                        <li><a href="#html" class="current">HTML</a></li>
-                        <li><a href="#css">CSS</a></li>
-                        <li><a href="#js">JS</a></li>
+                        <li><a href class="current">HTML</a></li>
+                        <li><a href>CSS</a></li>
+                        <li><a href>JS</a></li>
                     </ul>
                     <div class="code-tab-wrapper">
                         <div id="html" class="tab">
                         <pre>
+                            <code>
+
+                            </code>
 Lorem ipsum dolor sit amet, consectetur adipiscing elit.
 Maecenas elit neque, molestie tincidunt orci at, porta venenatis risus.
 Sed ultricies leo in fermentum placerat. Curabitur ante risus, lobortis ut laoreet id,
@@ -171,6 +278,12 @@ Mauris vel volutpat lorem. In mattis sapien ex, in finibus erat iaculis id.
     <footer class="site-footer">
 
     </footer>
-<script src="scripts/vendor/require.js" data-main="scripts/main"></script>
+    <script src="scripts/vendor/require.js" data-main="scripts/main"></script>
+    <script src="scripts/libs/angular.js" data-main="scripts/main"></script>
+    <script src="scripts/libs/angular-ui-router.js" data-main="scripts/main"></script>
+    <script src="scripts/app.js"></script>
+    <script src="scripts/controllers/app-controller.js" data-main="scripts/main"></script>
+    <script src="scripts/vendor/highlight.pack.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
 </body>
 </html>

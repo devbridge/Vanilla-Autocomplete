@@ -5,22 +5,16 @@ require.config({
     baseUrl: 'scripts/',
     paths: {
         Autocomplete: '../src/devbridge-autocomplete',
-        jquery: 'libs/jquery.min',
-        angular: 'libs/angular',
-        app: 'app'
+        //jquery: 'libs/jquery.min'
     },
     shim: {
-        angular: {
-            exports: 'angular',
-            deps: ['jquery']
-        },
         Autocomplete: {
             exports: 'Autocomplete'
         }
     }
 });
 
-require(['angular', 'Autocomplete'], function (angular, autocomplete) {
+require(['Autocomplete'], function (autocomplete) {
     'use strict';
 
     var element = document.getElementById('autocomplete-1');
@@ -52,5 +46,4 @@ require(['angular', 'Autocomplete'], function (angular, autocomplete) {
     var instance2 = new autocomplete(element2, options2);
 
     console.log('Page loaded: ', instance);
-    console.log('Page loaded: ', instance2);
 });
