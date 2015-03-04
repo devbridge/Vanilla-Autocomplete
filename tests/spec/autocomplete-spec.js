@@ -1,4 +1,4 @@
-describe("Autocomplete", function () {
+describe("Vanilla Autocomplete", function () {
 
     var keys = {
         ESC: 27,
@@ -10,6 +10,7 @@ describe("Autocomplete", function () {
         DOWN: 40,
         LETTER_i: 73
     };
+    var utils = VanillaAutocomplete.utils;
 
     function generateEvent(keyCode) {
         return {
@@ -19,7 +20,7 @@ describe("Autocomplete", function () {
         }
     }
 
-    describe('Autocomplete utils AJAX', function () {
+    describe('utils AJAX', function () {
         beforeEach(function() {
             jasmine.Ajax.install();
         });
@@ -55,7 +56,7 @@ describe("Autocomplete", function () {
         });
     });
 
-    describe('Autocomplete utils', function () {
+    describe('utils methods', function () {
 
         it ('#param() should convert object into query string', function () {
             var obj = { query: 'John Doe', test: 1 };
@@ -224,7 +225,7 @@ describe("Autocomplete", function () {
 
                 }
             };
-            instance = new Autocomplete(input, options);
+            instance = new VanillaAutocomplete(input, options);
         });
 
         afterEach(function () {
@@ -541,7 +542,7 @@ describe("Autocomplete", function () {
         });
     });
 
-    describe("Autocomplete option width", function () {
+    describe("Vanilla Autocomplete option width", function () {
         var input,
             instance,
             appendTo;
@@ -559,7 +560,7 @@ describe("Autocomplete", function () {
                 width: 300
             };
 
-            instance = new Autocomplete(input, options);
+            instance = new VanillaAutocomplete(input, options);
         });
 
         afterEach(function () {
@@ -575,7 +576,7 @@ describe("Autocomplete", function () {
         });
     });
 
-    describe("Autocomplete should use custom lookup", function () {
+    describe("Vanilla Autocomplete should use custom lookup", function () {
         var input,
             instance;
 
@@ -590,7 +591,7 @@ describe("Autocomplete", function () {
                 }
             };
 
-            instance = new Autocomplete(input, options);
+            instance = new VanillaAutocomplete(input, options);
         });
 
         afterEach(function () {
@@ -605,7 +606,7 @@ describe("Autocomplete", function () {
         });
     });
 
-    describe("Autocomplete methods", function () {
+    describe("Vanilla Autocomplete methods", function () {
         var input,
             instance,
             appendTo;
@@ -622,7 +623,7 @@ describe("Autocomplete", function () {
                 appendTo: appendTo
             };
 
-            instance = new Autocomplete(input, options);
+            instance = new VanillaAutocomplete(input, options);
         });
 
         afterEach(function () {
@@ -670,7 +671,7 @@ describe("Autocomplete", function () {
         });
     });
 
-    describe("Autocomplete AJAX", function () {
+    describe("Vanilla Autocomplete AJAX", function () {
         var input,
             instance,
             appendTo;
@@ -689,7 +690,7 @@ describe("Autocomplete", function () {
                 appendTo: appendTo
             };
 
-            instance = new Autocomplete(input, options);
+            instance = new VanillaAutocomplete(input, options);
         });
 
         afterEach(function () {
@@ -762,7 +763,7 @@ describe("Autocomplete", function () {
         });
     });
 
-    describe('Autocomplete events', function () {
+    describe('Vanilla Autocomplete events', function () {
         var input,
             instance,
             element;
@@ -775,7 +776,7 @@ describe("Autocomplete", function () {
                 lookup: ['AA1', 'AA2', 'BB1', 'BB2'],
             };
 
-            instance = new Autocomplete(input, options);
+            instance = new VanillaAutocomplete(input, options);
             instance.changeValue('A');
             element = instance.suggestionsContainer.children[1];
         });
@@ -839,5 +840,5 @@ describe("Autocomplete", function () {
 
             expect(instance.fixPosition).toHaveBeenCalled();
         });
- });
+    });
 });

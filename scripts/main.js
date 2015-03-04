@@ -5,11 +5,6 @@ require.config({
     baseUrl: 'scripts/',
     paths: {
         Autocomplete: '../src/devbridge-autocomplete'
-    },
-    shim: {
-        Autocomplete: {
-            exports: 'Autocomplete'
-        }
     }
 });
 
