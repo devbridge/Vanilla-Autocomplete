@@ -4,6 +4,7 @@ require.config({
     urlArgs: '',
     baseUrl: 'scripts/',
     paths: {
+<<<<<<< HEAD
         Autocomplete: '../src/devbridge-autocomplete',
         //jquery: 'libs/jquery.min'
     },
@@ -11,6 +12,9 @@ require.config({
         Autocomplete: {
             exports: 'Autocomplete'
         }
+=======
+        Autocomplete: '../src/devbridge-autocomplete'
+>>>>>>> origin/master
     }
 });
 

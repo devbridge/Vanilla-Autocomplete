@@ -1,27 +1,34 @@
 {
-  "name": "DevbridgeAutocomplete",
-  "version": "0.0.1",
-  "description": "Autocomplete library",
-  "moduleType": [
-    "amd",
-    "globals"
-  ],
-  "keywords": [
-    "devbridge",
-    "autocomplete"
-  ],
-  "authors": [
-    "Tomas Kirda"
-  ],
-  "license": "MIT",
-  "ignore": [
-    "**/.*",
-    "node_modules",
-    "bower_components",
-    "tests"
-  ],
-  "devDependencies": {
-    "jasmine": "~2.1.3",
-    "jasmine-ajax": "~2.99.0"
-  }
+    "name": "devbridge-vanilla-autocomplete",
+    "version": "1.0.0",
+    "description": "Autocomplete library without any dependencies",
+    "main": "dist/devbridge-vanilla-autocomplete.min.js",
+    "moduleType": [
+        "amd",
+        "globals"
+    ],
+    "keywords": [
+        "devbridge",
+        "vanilla",
+        "autocomplete"
+    ],
+    "authors": [
+        "Tomas Kirda"
+    ],
+    "license": "MIT",
+    "ignore": [
+        "**/.*",
+        "node_modules",
+        "bower_components",
+        "content",
+        "src",
+        "gruntfile.js",
+        "karma-conf.js",
+        "index.html",
+        "tests"
+    ],
+    "devDependencies": {
+        "jasmine": "~2.1.3",
+        "jasmine-ajax": "~2.99.0"
+    }
 }

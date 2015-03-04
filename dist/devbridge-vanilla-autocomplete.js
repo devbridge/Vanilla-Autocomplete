@@ -1,3 +1,10 @@
+/**
+*  Devbridge Vanilla Autocomplete, version 1.0.0
+*  (c) 2015 Tomas Kirda
+*
+*  Devbridge Vanilla Autocomplete is freely distributable under the terms of an MIT license.
+*  For details visit: https://github.com/devbridge/Vanilla-Autocomplete
+*/
 (function(root) {
     'use strict';
 
