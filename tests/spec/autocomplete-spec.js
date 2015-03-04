@@ -185,27 +185,36 @@ describe("Autocomplete", function () {
     });
 
     describe("By default", function () {
-        var input = document.createElement('input');
+        var instance, input, selectedSuggestion;
 
-        document.body.appendChild(input);
+        beforeEach(function () {
+            selectedSuggestion = null;
+            input = document.createElement('input');
 
-        var selectedSuggestion = null;
-        var options = {
-            lookup: [
-                { value: 'Chicago Bulls'      , data: { category: 'NBA' } },
-                { value: 'Chicago Blackhawks' , data: { category: 'NHL' } },
-                { value: 'Chicago Wolves'     , data: { category: 'NHL' } },
-                { value: 'Miami Heat'         , data: { category: 'NBA' } }
-            ],
-            autoSelectFirst: true,
-            onSelect: function (suggestion) {
-                selectedSuggestion = suggestion;
-            },
-            onHint: function () {
+            document.body.appendChild(input);
 
-            }
-        };
-        var instance = new Autocomplete(input, options);
+            var options = {
+                lookup: [
+                    { value: 'Chicago Bulls'      , data: { category: 'NBA' } },
+                    { value: 'Chicago Blackhawks' , data: { category: 'NHL' } },
+                    { value: 'Chicago Wolves'     , data: { category: 'NHL' } },
+                    { value: 'Miami Heat'         , data: { category: 'NBA' } }
+                ],
+                autoSelectFirst: true,
+                onSelect: function (suggestion) {
+                    selectedSuggestion = suggestion;
+                },
+                onHint: function () {
+
+                }
+            };
+            instance = new Autocomplete(input, options);
+        });
+
+        afterEach(function () {
+            instance.dispose();
+            input.parentNode.removeChild(input);
+        });
 
         it ("should set autocomplete attribute to 'off'", function () {
             expect(input.getAttribute('autocomplete')).toEqual('off');
@@ -220,8 +229,20 @@ describe("Autocomplete", function () {
         });
 
         it ("after key press RIGHT should select hint", function () {
+            function moveCaretToEnd(el) {
+                if (typeof el.selectionStart == "number") {
+                    el.selectionStart = el.selectionEnd = el.value.length;
+                } else if (typeof el.createTextRange != "undefined") {
+                    el.focus();
+                    var range = el.createTextRange();
+                    range.collapse(false);
+                    range.select();
+                }
+            }
+
             instance.changeValue('Chi');
             expect(instance.selectedIndex).toEqual(0);
+            moveCaretToEnd(instance.element);
 
             // Hit RIGHT:
             instance.onKeyDown(generateEvent(keys.RIGHT));
@@ -370,7 +391,7 @@ describe("Autocomplete", function () {
         });
 
         it ("after key up should call onValueChange", function () {
-            instance.value = 'Chi';
+            instance.element.value = 'Chi';
             instance.onKeyUp(generateEvent(keys.LETTER_i));
 
             expect(instance.visible).toBe(true);
@@ -428,7 +449,6 @@ describe("Autocomplete", function () {
         });
 
         it ("after key press ENTER should select suggestion", function () {
-            selectedSuggestion = null;
             expect(selectedSuggestion).toBeNull();
 
             instance.changeValue('Chi');
@@ -486,42 +506,51 @@ describe("Autocomplete", function () {
             instance.select(0);
             expect(instance.element.value).toBe('Test,Chicago Bulls');
         });
-    });
 
-    describe("Autocomplete triggerSelectOnValidInput: true", function () {
-        var input = document.createElement('input');
-        var appendTo = document.createElement('div');
-        var selected = null;
-        var options = {
-            lookup: ['Chicago', 'New York', 'Miami'],
-            appendTo: appendTo,
-            triggerSelectOnValidInput: true,
-            onSelect: function (suggestion) {
-                selected = suggestion.value;
-            }
-        };
-        var instance = new Autocomplete(input, options);
+        it("should select matching suggestion when triggerSelectOnValidInput is set to true", function () {
+            var selected = null;
 
-        it("should select matching suggestion", function () {
-            expect(selected).toBeNull();
-            instance.changeValue('Chicag');
+            instance.setOptions({
+                triggerSelectOnValidInput: true,
+                onSelect: function (suggestion) {
+                    selected = suggestion.value;
+                }
+            });
+
             instance.changeValue('Chicago');
-            expect(selected).toEqual('Chicago');
+            expect(selected).toBeNull();
+
+            instance.changeValue('Chicago Bulls');
+            expect(selected).toEqual('Chicago Bulls');
         });
     });
 
     describe("Autocomplete option width", function () {
-        var input = document.createElement('input');
-        var appendTo = document.createElement('div');
+        var input,
+            instance,
+            appendTo;
 
-        document.body.appendChild(appendTo);
+        beforeEach(function () {
+            input = document.createElement('input');
+            appendTo = document.createElement('div');
 
-        var options = {
-            lookup: ['Chicago', 'New York', 'Miami'],
-            appendTo: appendTo,
-            width: 300
-        };
-        var instance = new Autocomplete(input, options);
+            document.body.appendChild(input);
+            document.body.appendChild(appendTo);
+
+            var options = {
+                lookup: ['Chicago', 'New York', 'Miami'],
+                appendTo: appendTo,
+                width: 300
+            };
+
+            instance = new Autocomplete(input, options);
+        });
+
+        afterEach(function () {
+            instance.dispose();
+            input.parentNode.removeChild(input);
+            appendTo.parentNode.removeChild(appendTo);
+        });
 
         it("should set container width", function () {
             instance.changeValue('Chi');
@@ -531,14 +560,27 @@ describe("Autocomplete", function () {
     });
 
     describe("Autocomplete should use custom lookup", function () {
-        var input = document.createElement('input');
-        var selected = null;
-        var options = {
-            lookup: function (q, callback) {
-                callback({ suggestions: [{ value:'Chicago', data: 1 }] });
-            }
-        };
-        var instance = new Autocomplete(input, options);
+        var input,
+            instance;
+
+        beforeEach(function () {
+            input = document.createElement('input');
+
+            document.body.appendChild(input);
+
+            var options = {
+                lookup: function (q, callback) {
+                    callback({ suggestions: [{ value:'Chicago', data: 1 }] });
+                }
+            };
+
+            instance = new Autocomplete(input, options);
+        });
+
+        afterEach(function () {
+            instance.dispose();
+            input.parentNode.removeChild(input);
+        });
 
         it("should select matching suggestion", function () {
             expect(instance.suggestions.length).toEqual(0);
@@ -548,14 +590,30 @@ describe("Autocomplete", function () {
     });
 
     describe("Autocomplete methods", function () {
+        var input,
+            instance,
+            appendTo;
 
-        var input = document.createElement('input');
-        var appendTo = document.createElement('div');
-        var options = {
-            lookup: ['Chicago', 'New York', 'Miami'],
-            appendTo: appendTo
-        };
-        var instance = new Autocomplete(input, options);
+        beforeEach(function () {
+            input = document.createElement('input');
+            appendTo = document.createElement('div');
+
+            document.body.appendChild(input);
+            document.body.appendChild(appendTo);
+
+            var options = {
+                lookup: ['Chicago', 'New York', 'Miami'],
+                appendTo: appendTo
+            };
+
+            instance = new Autocomplete(input, options);
+        });
+
+        afterEach(function () {
+            instance.dispose();
+            input.parentNode.removeChild(input);
+            appendTo.parentNode.removeChild(appendTo);
+        });
 
         it ('#disable() should disable functionality', function () {
             var abortCalled = false;
@@ -597,18 +655,32 @@ describe("Autocomplete", function () {
     });
 
     describe("Autocomplete AJAX", function () {
+        var input,
+            instance,
+            appendTo;
+
         beforeEach(function() {
             jasmine.Ajax.install();
+
+            input = document.createElement('input');
+            appendTo = document.createElement('div');
+
+            document.body.appendChild(input);
+            document.body.appendChild(appendTo);
+
+            var options = {
+                serviceUrl: '/suggest',
+                appendTo: appendTo
+            };
+
+            instance = new Autocomplete(input, options);
         });
 
-        var input = document.createElement('input');
-        var appendTo = document.createElement('div');
-        var options = {
-            serviceUrl: '/suggest',
-            appendTo: appendTo
-        };
-        var instance = new Autocomplete(input, options);
-
+        afterEach(function () {
+            instance.dispose();
+            input.parentNode.removeChild(input);
+            appendTo.parentNode.removeChild(appendTo);
+        });
 
         it ('#ajax() should get ajax data', function (done) {
             var called = false;
@@ -675,25 +747,34 @@ describe("Autocomplete", function () {
     });
 
     describe('Autocomplete events', function () {
-        var input = document.createElement('input');
-        var selected = false;
-        var options = {
-            lookup: ['AA1', 'AA2', 'BB1', 'BB2'],
-            onSelect: function () {
-                selected = true;
-            }
-        };
-        var instance = new Autocomplete(input, options);
-        instance.changeValue('A');
-        var index = 1;
-        var element = instance.suggestionsContainer.children[index];
+        var input,
+            instance,
+            element;
+
+        beforeEach(function() {
+            input = document.createElement('input');
+            document.body.appendChild(input);
+
+            var options = {
+                lookup: ['AA1', 'AA2', 'BB1', 'BB2'],
+            };
+
+            instance = new Autocomplete(input, options);
+            instance.changeValue('A');
+            element = instance.suggestionsContainer.children[1];
+        });
+
+        afterEach(function () {
+            instance.dispose();
+            input.parentNode.removeChild(input);
+        });
 
         it ('mouseover should activate element', function () {
             var event = document.createEvent('CustomEvent');
             event.initEvent('mouseover', true, false);
             element.dispatchEvent(event);
 
-            expect(instance.selectedIndex).toBe(index);
+            expect(instance.selectedIndex).toBe(1);
         });
 
         it ('mouseout should deactivate element', function () {
@@ -705,9 +786,15 @@ describe("Autocomplete", function () {
         });
 
         it ('click should select value', function () {
-            expect(selected).toBe(false);
-
+            var selected = false;
             var event = document.createEvent('CustomEvent');
+
+            instance.setOptions({
+                onSelect: function () {
+                    selected = true;
+                }
+            });
+
             event.initEvent('click', true, false);
             element.dispatchEvent(event);
 
@@ -718,10 +805,11 @@ describe("Autocomplete", function () {
             input.value = 'B';
 
             var event = document.createEvent('CustomEvent');
+
             event.initEvent('keydown', true, false);
             element.dispatchEvent(event);
 
-            expect(selected).toBe(true);
+            expect(instance.visible).toBe(true);
         });
 
         it ("should adjust position on window resize.", function () {

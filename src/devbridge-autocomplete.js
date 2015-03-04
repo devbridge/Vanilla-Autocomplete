@@ -1035,6 +1035,8 @@ Autocomplete.prototype = {
 
         that.disableKillerFn();
 
-        container.parentNode.removeChild(container);
+        if (container.parentNode) {
+            container.parentNode.removeChild(container);
+        }
     }
 };
