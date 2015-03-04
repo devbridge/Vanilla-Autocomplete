@@ -5,8 +5,9 @@
     <title>Devbridge Autocomplete</title>
     <link rel="stylesheet" href="content/css/styles.css" />
     <link rel="stylesheet" href="content/css/demo.css" />
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
 </head>
-<body>
+<body ng-controller="AppController as ctrl">
     <header class="site-header">
         <div class="container">
             <h1>AutocompleteJS</h1>
@@ -20,6 +21,69 @@
                     <label for="autocomplete-1"><span class="sr-only">Example search</span><i class="icon-db"></i></label>
                     <input type="text" id="autocomplete-1" placeholder="Search Facebook"/>
                     <button class="btn-search"><span class="icon-search"></span></button>
+                </div>
+            </div>
+            <div class="container">
+                <ul class="code-tabs">
+                    <li><a href="#html">HTML</a></li>
+                    <li><a href="#css">CSS</a></li>
+                    <li><a href="#js">JS</a></li>
+                </ul>
+                <div class="code-tab-wrapper">
+                    <div id="html" class="tab">
+                        <pre>
+Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+Maecenas elit neque, molestie tincidunt orci at, porta venenatis risus.
+Sed ultricies leo in fermentum placerat. Curabitur ante risus, lobortis ut laoreet id,
+mollis sed ante. Integer vitae auctor sapien, sit
+amet varius tellus. Curabitur vel lectus vestibulum, lobortis ipsum varius,
+ultrices quam. Nam sagittis et nulla et sodales. Phasellus interdum pretium pulvinar.
+Nunc condimentum tortor libero, a efficitur augue pretium eget. Aenean in magna nulla.
+Nullam pharetra sem ut enim ornare, sodales ultricies sapien congue.
+Phasellus egestas orci non elit ultrices, id imperdiet leo dignissim.
+In hac habitasse platea dictumst. Donec malesuada venenatis mauris non vestibulum.
+Integer vitae magna blandit, tempus neque eu, ullamcorper metus.
+Maecenas auctor justo vitae quam sodales suscipit.
+Fusce semper enim et consectetur mollis. Vivamus vel ullamcorper tortor.
+Mauris vel volutpat lorem. In mattis sapien ex, in finibus erat iaculis id.
+</pre>
+                    </div>
+                    <div id="css" class="tab">
+                        <pre>
+Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+Maecenas elit neque, molestie tincidunt orci at, porta venenatis risus.
+Sed ultricies leo in fermentum placerat. Curabitur ante risus, lobortis ut laoreet id,
+mollis sed ante. Integer vitae auctor sapien, sit
+amet varius tellus. Curabitur vel lectus vestibulum, lobortis ipsum varius,
+ultrices quam. Nam sagittis et nulla et sodales. Phasellus interdum pretium pulvinar.
+Nunc condimentum tortor libero, a efficitur augue pretium eget. Aenean in magna nulla.
+Nullam pharetra sem ut enim ornare, sodales ultricies sapien congue.
+Phasellus egestas orci non elit ultrices, id imperdiet leo dignissim.
+In hac habitasse platea dictumst. Donec malesuada venenatis mauris non vestibulum.
+Integer vitae magna blandit, tempus neque eu, ullamcorper metus.
+Maecenas auctor justo vitae quam sodales suscipit.
+Fusce semper enim et consectetur mollis. Vivamus vel ullamcorper tortor.
+Mauris vel volutpat lorem. In mattis sapien ex, in finibus erat iaculis id.
+</pre>
+                    </div>
+                    <div id="js" class="tab">
+                        <pre>
+Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+Maecenas elit neque, molestie tincidunt orci at, porta venenatis risus.
+Sed ultricies leo in fermentum placerat. Curabitur ante risus, lobortis ut laoreet id,
+mollis sed ante. Integer vitae auctor sapien, sit
+amet varius tellus. Curabitur vel lectus vestibulum, lobortis ipsum varius,
+ultrices quam. Nam sagittis et nulla et sodales. Phasellus interdum pretium pulvinar.
+Nunc condimentum tortor libero, a efficitur augue pretium eget. Aenean in magna nulla.
+Nullam pharetra sem ut enim ornare, sodales ultricies sapien congue.
+Phasellus egestas orci non elit ultrices, id imperdiet leo dignissim.
+In hac habitasse platea dictumst. Donec malesuada venenatis mauris non vestibulum.
+Integer vitae magna blandit, tempus neque eu, ullamcorper metus.
+Maecenas auctor justo vitae quam sodales suscipit.
+Fusce semper enim et consectetur mollis. Vivamus vel ullamcorper tortor.
+Mauris vel volutpat lorem. In mattis sapien ex, in finibus erat iaculis id.
+</pre>
+                    </div>
                 </div>
             </div>
         </section>

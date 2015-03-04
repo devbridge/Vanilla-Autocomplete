@@ -6,6 +6,14 @@ body {
 	font-family: 'Helvetica', sans-serif;
 }
 
+@mixin clearfix {
+	&:after {
+		content: "";
+		display: table;
+		clear: both;
+	}
+}
+
 .sr-only {
 	position: absolute;
 	width: 1px;
@@ -41,8 +49,7 @@ input, button, select, textarea {
 }
 
 .demo-area {
-	padding: 150px 0 10px;
-	min-height: 600px;
+	padding: 150px 0 0;
 }
 
 .demo-title {
@@ -193,6 +200,22 @@ input, button, select, textarea {
 		max-width: 600px;
 		margin: 0 auto;
 		clear: both;
+		&:before {
+			position: absolute;
+			right: 65px;
+			top: 3px;
+			content: '';
+			width: 17px;
+			height: 23px;
+			background: url("data:image/gif;base64,R0lGODlhHAAmAKIHAKqqqsvLy0hISObm5vf394uLiwAAAP///yH5BAEAAAcALAAAAAAcACYAAAO9eLpMIMYIQJi9DcYtKv6KtnHgB4yoAZSXKAyDy1rjoAzjzOQLrx8+4OanCAZnxiExGSEKmz3lj2lwUq3SZ3WZPbKuXGgxu9t4tLYDTkpIRQILF0x2G4lWipM7gj/oJQUkcXsCDCIFATULBCIcZ2tvB3QLDxETFnR/BgU/gRt9jX0gnpYMkJZpFzEoqQqJKAIBaQOVKHAXr3t7txgBjboSvB8EpLoFZywOAo3LFE5lYs/QW9LT1TRk1V7S2xYJADs=") no-repeat center center;
+			background-size: 14px 19px;
+			opacity: .6;
+		}
+		&:hover {
+			&:before {
+				opacity: 1;
+			}
+		}
 	}
 	label {
 		position: absolute;
@@ -237,13 +260,16 @@ input, button, select, textarea {
 		cursor: default;
 		display: block;
 		height: 30px;
-		width: 50px;
+		width: 60px;
 		line-height: 1;
 		right: 0;
 		text-align: center;
 		top: 0;
 		z-index: 1;
 		border-radius: 0 3px 3px 0;
+		.icon-search {
+			font-size: 14px;
+		}
 	}
 	.autocomplete-suggestions {
 		background-color: #fff;
@@ -268,4 +294,15 @@ input, button, select, textarea {
 	}
 
 
+}
+
+.code-tab-wrapper {
+	@include clearfix();
+	.tab {
+		padding: 1em;
+		color: #fff;
+		background-color: rgba(#000, .5);
+		overflow: auto;
+		max-height: 200px;
+	}
 }
