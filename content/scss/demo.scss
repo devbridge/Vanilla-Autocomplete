@@ -7,4 +7,6 @@
 @import "components/autocomplete";
 
 //Project styles
-@import "site/modules";
+@import "site/all",
+		"site/modules",
+		"site/examples";

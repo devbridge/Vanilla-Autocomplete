@@ -1,0 +1,224 @@
+.facebook {
+	background: linear-gradient(to top, #4D6BA1, #3B5998);
+	font-family: 'lucida grande', tahoma, verdana, arial, sans-serif;
+	.demo-title {
+		color: $white;
+	}
+	.input-wrapper {
+		position: relative;
+		max-width: 600px;
+		margin: 0 auto;
+		clear: both;
+	}
+	.btn-search {
+		position: absolute;
+		content: '';
+		background: #f6f7f8;
+		color: #535C68;
+		border: 1px solid #355089;
+		border-left: 0;
+		border-radius: 0 $border-radius $border-radius 0;
+		cursor: default;
+		display: block;
+		height: 26px;
+		width: 50px;
+		line-height: 1;
+		right: 0;
+		text-align: center;
+		top: 0;
+		z-index: 1;
+	}
+	label {
+		position: absolute;
+		right: 100%;
+		.icon-db {
+			color: $white;
+			display: block;
+			border-radius: $border-radius;
+			overflow: hidden;
+			height: 26px;
+			width: 27px;
+			margin-right: 5px;
+			border: 1px solid #355089;
+			text-align: center;
+			&:before {
+				font-size: 26px;
+			}
+		}
+	}
+	input {
+		width: 100%;
+		border: 1px solid #355089;
+		border-radius: $border-radius;
+		height: 26px;
+		padding-left: 5px;
+		font-size: .875em;
+		&:focus ~ .btn-search {
+			background-color: #5890ff;
+			color: $white;
+		}
+	}
+	.autocomplete-suggestions {
+		background-color: $white;
+		border-radius: $border-radius;
+		border: 1px solid #ccc;
+		box-shadow: 0 4px 6px 2px rgba(0, 0, 0, .10);
+		font-size: .875em;
+		margin-left: 1px;
+		clear: both;
+	}
+	.autocomplete-suggestion {
+		position: relative;
+		cursor: pointer;
+	}
+	.autocomplete-selected {
+		background-color: #EBEEF4;
+	}
+	.autocomplete-suggestions strong {
+		font-weight: 700;
+	}
+	.suggestion-img {
+		float: left;
+		height: 40px;
+		line-height: 40px;
+		margin: 4px 8px 0 6px;
+		overflow: hidden;
+		text-align: center;
+		vertical-align: middle;
+		width: 40px;
+		img {
+			max-width: 100%;
+			max-height: 40px;
+			display: block;
+		}
+	}
+	.suggestion-wrapper {
+		display: block;
+		height: 48px;
+		overflow: hidden;
+		position: relative;
+		text-overflow: ellipsis;
+		vertical-align: middle;
+		line-height: 16px;
+		padding: 7px 0;
+	}
+	.suggestion-value {
+		display: block;
+		line-height: normal;
+		font-weight: 700;
+	}
+	.sub-text {
+		color: #999;
+		font-size: 11px;
+		font-weight: normal;
+	}
+}
+
+.google {
+	background-color: #F1F1F1;
+	font-family: 'lucida grande', tahoma, verdana, arial, sans-serif;
+	.demo-title {
+		color: $black;
+		margin-bottom: 1em;
+		img {
+			max-width: 269px;
+		}
+	}
+	.input-wrapper {
+		position: relative;
+		max-width: 600px;
+		margin: 0 auto;
+		clear: both;
+		&:before {
+			position: absolute;
+			right: 65px;
+			top: 3px;
+			content: '';
+			width: 17px;
+			height: 23px;
+			background: url("data:image/gif;base64,R0lGODlhHAAmAKIHAKqqqsvLy0hISObm5vf394uLiwAAAP///yH5BAEAAAcALAAAAAAcACYAAAO9eLpMIMYIQJi9DcYtKv6KtnHgB4yoAZSXKAyDy1rjoAzjzOQLrx8+4OanCAZnxiExGSEKmz3lj2lwUq3SZ3WZPbKuXGgxu9t4tLYDTkpIRQILF0x2G4lWipM7gj/oJQUkcXsCDCIFATULBCIcZ2tvB3QLDxETFnR/BgU/gRt9jX0gnpYMkJZpFzEoqQqJKAIBaQOVKHAXr3t7txgBjboSvB8EpLoFZywOAo3LFE5lYs/QW9LT1TRk1V7S2xYJADs=") no-repeat center center;
+			background-size: 14px 19px;
+			opacity: .6;
+		}
+		&:hover {
+			&:before {
+				opacity: 1;
+			}
+		}
+	}
+	label {
+		position: absolute;
+		right: 100%;
+		.icon-db {
+			color: red;
+			display: block;
+			border-radius: $border-radius;
+			overflow: hidden;
+			height: 26px;
+			width: 27px;
+			margin-right: 5px;
+			border: 1px solid red;
+			text-align: center;
+			&:before {
+				font-size: 26px;
+			}
+		}
+	}
+	input {
+		width: 100%;
+		border: 1px solid #A0A0A0;
+		height: 30px;
+		padding-left: 5px;
+		font-size: .875em;
+		border-radius: 0 $border-radius $border-radius 0;
+		&:focus {
+			border-color: #4d90fe;
+		}
+		&:focus ~ .btn-search {
+			background-color: #5890ff;
+			color: $white;
+		}
+	}
+	.btn-search {
+		position: absolute;
+		content: '';
+		background: linear-gradient(#4d90fe, #4787ed);
+		color: $white;
+		border: 1px solid #4d90fe;
+		border-left: 0;
+		cursor: default;
+		display: block;
+		height: 30px;
+		width: 60px;
+		line-height: 1;
+		right: 0;
+		text-align: center;
+		top: 0;
+		z-index: 1;
+		border-radius: 0 $border-radius $border-radius 0;
+		.icon-search {
+			font-size: 14px;
+		}
+	}
+	.autocomplete-suggestions {
+		background-color: $white;
+		border: 1px solid #ccc;
+		box-shadow: 0 4px 6px 2px rgba(0, 0, 0, .10);
+		font-size: .875em;
+		margin-top: -1px;
+		overflow: hidden;
+	}
+	.autocomplete-suggestion {
+		position: relative;
+		cursor: pointer;
+		font-weight: 700;
+		line-height: 22px;
+		padding: 0 5px;
+	}
+	.autocomplete-selected {
+		background-color: #EBEEF4;
+	}
+	.autocomplete-suggestions strong {
+		font-weight: 100;
+	}
+}

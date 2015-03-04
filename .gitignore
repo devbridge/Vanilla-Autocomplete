@@ -7,4 +7,5 @@
 
 *.codekit
 config.codekit
-/.sass-cache
+.sass-cache
+/js-min

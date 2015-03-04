@@ -1,0 +1,49 @@
+*, *:before, *:after {
+	box-sizing: border-box;
+}
+
+body {
+	font-family: 'Helvetica', sans-serif;
+}
+
+@mixin clearfix {
+	&:after {
+		content: "";
+		display: table;
+		clear: both;
+	}
+}
+
+.sr-only {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
+	overflow: hidden;
+	clip: rect(0,0,0,0);
+	border: 0;
+}
+
+.site-header {
+	min-height: 800px;
+	text-align: center;
+	width: 100%;
+	display: table;
+	.container {
+		display: table-cell;
+		vertical-align: middle;
+	}
+	h1 {
+		font-size: 3em;
+	}
+}
+
+.container {
+	max-width: 940px;
+	margin: 0 auto;
+}
+
+input, button, select, textarea {
+	outline: none;
+}

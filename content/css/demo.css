@@ -1,10 +1,9 @@
 @font-face {
   font-family: 'icomoon';
-  src: url('../fonts/icomoon.eot?-yxb3x0');
-  src: url('../fonts/icomoon.eot?#iefix-yxb3x0') format('embedded-opentype'), url('../fonts/icomoon.woff?-yxb3x0') format('woff'), url('../fonts/icomoon.ttf?-yxb3x0') format('truetype'), url('../fonts/icomoon.svg?-yxb3x0#icomoon') format('svg');
+  src: url("../fonts/icomoon.eot?-yxb3x0");
+  src: url("../fonts/icomoon.eot?#iefix-yxb3x0") format("embedded-opentype"), url("../fonts/icomoon.woff?-yxb3x0") format("woff"), url("../fonts/icomoon.ttf?-yxb3x0") format("truetype"), url("../fonts/icomoon.svg?-yxb3x0#icomoon") format("svg");
   font-weight: normal;
   font-style: normal; }
-
 [class^="icon-"], [class*=" icon-"] {
   font-family: 'icomoon';
   speak: none;
@@ -58,7 +57,11 @@ input, button, select, textarea {
   outline: none; }
 
 .demo-area {
-  padding: 150px 0 0; }
+  border-bottom: 5px solid #d3d3d3;
+  overflow: hidden; }
+
+.demo-wrapper {
+  padding: 100px 0 50px; }
 
 .demo-title {
   display: block;
@@ -70,10 +73,73 @@ input, button, select, textarea {
 .icon-search {
   font-size: 16px; }
 
+.code-tab-wrapper:after {
+  content: "";
+  display: table;
+  clear: both; }
+.code-tab-wrapper .tab {
+  padding: 1em;
+  color: #fff;
+  background-color: #000;
+  overflow: auto;
+  max-height: 200px; }
+
+.code-tabs {
+  font-size: 0;
+  margin-bottom: -1px;
+  position: relative;
+  z-index: 1; }
+  .code-tabs li {
+    font-size: 16px;
+    display: inline-block;
+    vertical-align: top;
+    margin-right: 5px; }
+  .code-tabs a {
+    display: block;
+    padding: 10px 20px;
+    border: 1px solid #d3d3d3;
+    border-radius: 4px 4px 0 0;
+    background-color: #fff;
+    color: #000;
+    text-decoration: none; }
+    .code-tabs a:hover {
+      border-color: #d3d3d3; }
+    .code-tabs a.current {
+      border-bottom-color: #fff; }
+
+.code-examples-wrapper {
+  background-color: #fff;
+  margin-top: 50px;
+  padding-top: 50px;
+  padding-bottom: 50px;
+  position: relative;
+  z-index: 100; }
+  .code-examples-wrapper:before, .code-examples-wrapper:after {
+    position: absolute;
+    content: '';
+    border-bottom: 30px solid #fff;
+    top: -30px;
+    z-index: 100; }
+  .code-examples-wrapper:before {
+    border-left: 1000px solid transparent;
+    border-right: 0px solid transparent;
+    right: 50%; }
+  .code-examples-wrapper:after {
+    border-left: 0px solid transparent;
+    border-right: 1000px solid transparent;
+    left: 50%; }
+
+.code-tab-wrapper {
+  padding: 1em;
+  border: 1px solid #d3d3d3;
+  border-radius: 0 4px 4px 4px; }
+
+pre {
+  font-family: monospace;
+  white-space: pre; }
+
 .facebook {
-  background: -webkit-linear-gradient(bottom, #4D6BA1, #3B5998);
   background: linear-gradient(to top, #4D6BA1, #3B5998);
-  border-bottom: 1px solid #133783;
   font-family: 'lucida grande', tahoma, verdana, arial, sans-serif; }
   .facebook .demo-title {
     color: #fff; }
@@ -105,7 +171,7 @@ input, button, select, textarea {
     .facebook label .icon-db {
       color: #fff;
       display: block;
-      border-radius: 3px;
+      border-radius: 4px;
       overflow: hidden;
       height: 26px;
       width: 27px;
@@ -171,7 +237,7 @@ input, button, select, textarea {
     font-weight: normal; }
 
 .google {
-  border-bottom: 1px solid #E5E5E5;
+  background-color: #F1F1F1;
   font-family: 'lucida grande', tahoma, verdana, arial, sans-serif; }
   .google .demo-title {
     color: #000;
@@ -201,7 +267,7 @@ input, button, select, textarea {
     .google label .icon-db {
       color: red;
       display: block;
-      border-radius: 3px;
+      border-radius: 4px;
       overflow: hidden;
       height: 26px;
       width: 27px;
@@ -225,8 +291,7 @@ input, button, select, textarea {
   .google .btn-search {
     position: absolute;
     content: '';
-    background: -webkit-linear-gradient(top, #4d90fe, #4787ed);
-    background: linear-gradient(top, #4d90fe, #4787ed);
+    background: linear-gradient(#4d90fe, #4787ed);
     color: #fff;
     border: 1px solid #4d90fe;
     border-left: 0;
@@ -239,7 +304,7 @@ input, button, select, textarea {
     text-align: center;
     top: 0;
     z-index: 1;
-    border-radius: 0 3px 3px 0; }
+    border-radius: 0 4px 4px 0; }
     .google .btn-search .icon-search {
       font-size: 14px; }
   .google .autocomplete-suggestions {
@@ -259,14 +324,3 @@ input, button, select, textarea {
     background-color: #EBEEF4; }
   .google .autocomplete-suggestions strong {
     font-weight: 100; }
-
-.code-tab-wrapper:after {
-  content: "";
-  display: table;
-  clear: both; }
-.code-tab-wrapper .tab {
-  padding: 1em;
-  color: #fff;
-  background-color: rgba(0, 0, 0, 0.5);
-  overflow: auto;
-  max-height: 200px; }

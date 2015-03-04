@@ -5,14 +5,6 @@ define('app', ['angular', 'uiRouter'], function (angular) {
         'ui.router'
     ])
 
-        .run(['$rootScope',
-            function ($rootScope) {
-                // Scroll to top when view changes:
-                $rootScope.$on('$viewContentLoaded', function () {
-                    window.scrollTo(0, 0);
-                });
-            }])
-
         .config(['$urlRouterProvider', '$stateProvider',
             function ($urlRouterProvider, $stateProvider) {
 
@@ -26,8 +18,9 @@ define('app', ['angular', 'uiRouter'], function (angular) {
                     })
 
                     .state('app.home', {
-                        url: '/',
+                        url: '/home/',
                         templateUrl: 'index.html'
                     });
             }]);
+    console.log('angular loaded');
 });
