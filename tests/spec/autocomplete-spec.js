@@ -182,6 +182,22 @@ describe("Autocomplete", function () {
             expect(minHeight).toEqual('100px');
             expect(width).toEqual('200px');
         });
+
+        it ('#removeClass() should remove class from element', function () {
+            var div = document.createElement('div');
+
+            div.className = 'test';
+            utils.removeClass(div, 'test');
+            expect(div.className).toEqual('');
+
+            div.className = 'test-class';
+            utils.removeClass(div, 'test');
+            expect(div.className).toEqual('test-class');
+
+            div.className = 'test-class classToRemove other-class';
+            utils.removeClass(div, 'classToRemove');
+            expect(div.className).toEqual('test-class other-class');
+        });
     });
 
     describe("By default", function () {

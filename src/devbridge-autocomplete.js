@@ -77,7 +77,8 @@ utils.createNode = function (containerClass) {
 };
 
 utils.hasClass = function (domElement, className) {
-    return (domElement.className || '').split(' ').indexOf(className) > -1;
+    var classes = (domElement.className || '').split(' ');
+    return utils.inArray(className, classes) > -1;
 };
 
 utils.getData = function (domElement, dataName) {
@@ -162,7 +163,7 @@ utils.css = function (element, cssObj){
         if (cssObj.hasOwnProperty(key)){
             var prop = utils.toCamelCase(key);
             var value = cssObj[key];
-            if (typeof value === 'number' && ['width', 'height', 'top', 'left', 'right', 'bottom'].indexOf(prop) > -1){
+            if (typeof value === 'number' && utils.inArray(prop, ['width', 'height', 'top', 'left', 'right', 'bottom']) > -1){
                 value += 'px';
             }
             style[prop] = value;
@@ -188,7 +189,16 @@ utils.each = function (collection, callback) {
 };
 
 utils.removeClass = function (element, className) {
-    element.className = element.className.replace(new RegExp('\\b' + className + '\\b'), '');
+    var classes = element.className.split(' ');
+    var list = [];
+
+    utils.each(classes, function (name) {
+        if (className !== name) {
+            list.push(name);
+        }
+    });
+
+    element.className = list.join(' ');
 };
 
 utils.addClass = function (element, className) {
