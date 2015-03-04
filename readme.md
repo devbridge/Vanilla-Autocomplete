@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/devbridge/Devbridge-Autocomplete.svg?branch=master)](https://travis-ci.org/devbridge/Devbridge-Autocomplete)
+[![Build Status](https://travis-ci.org/devbridge/Vanilla-Autocomplete.svg?branch=master)](https://travis-ci.org/devbridge/Vanilla-Autocomplete)
 
 #Devbridge Vanilla Autocomplete
 
