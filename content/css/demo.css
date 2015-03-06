@@ -26,6 +26,10 @@
   content: "\e601";
 }
 
+.autocomplete-suggestions {
+  overflow: auto;
+}
+
 *, *:before, *:after {
   box-sizing: border-box;
 }

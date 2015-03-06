@@ -9,8 +9,11 @@ function AppController(utilsService) {
     self.init = function () {
         var element = document.getElementById('autocomplete-1');
 
+
+
+
         var options = {
-            serviceUrl: '/scripts/suggestions-fb.json',
+            lookup: suggestions,
             minChars: 1,
             autoSelectFirst: true,
             appendTo: element.parentNode,
@@ -27,7 +30,7 @@ function AppController(utilsService) {
         var element2 = document.getElementById('autocomplete-2');
 
         var options2 = {
-            serviceUrl: '/scripts/suggestions-google.json',
+            lookup: suggestions,
             minChars: 1,
             autoSelectFirst: true,
             appendTo: element2.parentNode
@@ -36,6 +39,7 @@ function AppController(utilsService) {
         var instance2 = new VanillaAutocomplete(element2, options2);
 
         console.log('Page loaded: ', instance);
+        console.log('Page loaded: ', instance2);
     };
 
     self.init();
