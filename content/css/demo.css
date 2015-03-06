@@ -34,17 +34,6 @@ body {
   font-family: 'Helvetica', sans-serif;
 }
 
-.sr-only {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  border: 0;
-}
-
 .site-header {
   min-height: 800px;
   text-align: center;
@@ -59,6 +48,10 @@ body {
   font-size: 3em;
 }
 
+.site-footer {
+  padding: 50px 0;
+}
+
 .container {
   max-width: 940px;
   margin: 0 auto;
@@ -66,6 +59,30 @@ body {
 
 input, button, select, textarea {
   outline: none;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+.text-right {
+  float: right;
+}
+
+p .icon-db {
+  overflow: hidden;
+  border-radius: 4px;
+  display: inline-block;
+  vertical-align: top;
+  margin-top: -2px;
+  color: #CE2B27;
 }
 
 .demo-area {

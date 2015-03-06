@@ -14,17 +14,6 @@ body {
 	}
 }
 
-.sr-only {
-	position: absolute;
-	width: 1px;
-	height: 1px;
-	padding: 0;
-	margin: -1px;
-	overflow: hidden;
-	clip: rect(0,0,0,0);
-	border: 0;
-}
-
 .site-header {
 	min-height: 800px;
 	text-align: center;
@@ -39,6 +28,10 @@ body {
 	}
 }
 
+.site-footer {
+	padding: 50px 0;
+}
+
 .container {
 	max-width: 940px;
 	margin: 0 auto;
@@ -46,4 +39,30 @@ body {
 
 input, button, select, textarea {
 	outline: none;
+}
+
+.sr-only {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
+	overflow: hidden;
+	clip: rect(0,0,0,0);
+	border: 0;
+}
+
+.text-right {
+	float: right;
+}
+
+p {
+	.icon-db {
+		overflow: hidden;
+		border-radius: $border-radius;
+		display: inline-block;
+		vertical-align: top;
+		margin-top: -2px;
+		color: $red;
+	}
 }

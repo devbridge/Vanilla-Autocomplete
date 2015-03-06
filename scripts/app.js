@@ -12,11 +12,9 @@
                     url: '',
                     template: '<ui-view></ui-view>'
                 })
-
                 .state('app.home', {
                     url: '/home/',
                     templateUrl: 'index.html'
                 });
         }]
     );
-    console.log('angular loaded');
