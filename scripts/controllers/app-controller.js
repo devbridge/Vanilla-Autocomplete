@@ -13,7 +13,7 @@ function AppController(utilsService) {
 
 
         var options = {
-            lookup: suggestions,
+            lookup: lookup.suggestions,
             minChars: 1,
             autoSelectFirst: true,
             appendTo: element.parentNode,
@@ -30,7 +30,7 @@ function AppController(utilsService) {
         var element2 = document.getElementById('autocomplete-2');
 
         var options2 = {
-            lookup: suggestions,
+            lookup: lookup.suggestions,
             minChars: 1,
             autoSelectFirst: true,
             appendTo: element2.parentNode

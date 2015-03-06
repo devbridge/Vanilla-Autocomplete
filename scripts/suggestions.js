@@ -1,4 +1,4 @@
-var suggestions = {
+var lookup = {
     "suggestions": [
         {
             "value": "Chicago Blackhawks",
