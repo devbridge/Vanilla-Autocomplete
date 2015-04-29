@@ -202,9 +202,13 @@ describe("Vanilla Autocomplete", function () {
     });
 
     describe("By default", function () {
-        var instance, input, selectedSuggestion;
+        var instance;
+        var input;
+        var selectedSuggestion;
 
         beforeEach(function () {
+            jasmine.Ajax.install();
+
             selectedSuggestion = null;
             input = document.createElement('input');
 
@@ -225,12 +229,54 @@ describe("Vanilla Autocomplete", function () {
 
                 }
             };
+
             instance = new VanillaAutocomplete(input, options);
         });
 
         afterEach(function () {
             instance.dispose();
             input.parentNode.removeChild(input);
+        });
+
+        it ("#isBadQuery() should always return false when preventBadQueries is set to false", function () {
+            instance.setOptions({
+                preventBadQueries: false,
+                lookup: null,
+                serviceUrl: '/test'
+            });
+
+            var query = 'BadValue';
+
+            // Do it twice:
+            instance.changeValue(query);
+
+            query = query + 'X';
+            instance.changeValue(query);
+
+            expect(instance.isBadQuery(query)).toEqual(false);
+        });
+
+        it ("#isBadQuery() should always true when preventBadQueries is set to true", function () {
+            instance.setOptions({
+                preventBadQueries: true,
+                lookup: null,
+                serviceUrl: '/test'
+            });
+
+            var query = 'BadValue';
+
+            // Do it twice:
+            instance.changeValue(query);
+
+            jasmine.Ajax.requests.mostRecent().respondWith({
+                status: 200,
+                responseText: '{ "suggestions": [] }'
+            });
+
+            query = query + 'X';
+            instance.changeValue(query);
+
+            expect(instance.isBadQuery(query)).toEqual(true);
         });
 
         it ("should set autocomplete attribute to 'off'", function () {
@@ -773,7 +819,7 @@ describe("Vanilla Autocomplete", function () {
             document.body.appendChild(input);
 
             var options = {
-                lookup: ['AA1', 'AA2', 'BB1', 'BB2'],
+                lookup: ['AA1', 'AA2', 'BB1', 'BB2']
             };
 
             instance = new VanillaAutocomplete(input, options);
