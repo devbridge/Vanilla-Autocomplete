@@ -1,3 +1,5 @@
+/* global define */
+
 (function(root) {
     'use strict';
 
@@ -363,7 +365,7 @@
             function bind(fn) {
                 return function (e) {
                     fn.call(that, e);
-                }
+                };
             }
 
             utils.on(element, 'keydown', bind(that.onKeyDown));
@@ -382,7 +384,17 @@
         },
 
         onBlur: function () {
-            this.enableKillerFn();
+            var that = this;
+            that.enableKillerFn();
+            that.ajaxAbort();
+        },
+        
+        ajaxAbort: function () {
+            var that = this;
+            if (that.currentRequest) {
+                utils.ajaxAbort(that.currentRequest);
+                that.currentRequest = null;
+            }
         },
 
         setOptions: function (suppliedOptions) {
@@ -420,10 +432,7 @@
             var that = this;
             that.disabled = true;
             clearInterval(that.onChangeInterval);
-            if (that.currentRequest) {
-                utils.ajaxAbort(that.currentRequest);
-                that.currentRequest = null;
-            }
+            that.ajaxAbort();
         },
 
         enable: function () {
@@ -715,10 +724,7 @@
                 that.suggest();
                 options.onSearchComplete.call(that.element, q, response.suggestions);
             } else if (!that.isBadQuery(q)) {
-                if (that.currentRequest) {
-                    utils.ajaxAbort(that.currentRequest);
-                    that.currentRequest = null;
-                }
+                that.ajaxAbort();
 
                 ajaxSettings = {
                     url: serviceUrl,
